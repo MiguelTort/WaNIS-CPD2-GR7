@@ -203,25 +203,27 @@ public class Controller {
 
     public void logOut(ActionEvent actionEvent) throws IOException {
         String test = "";
-        for(int a = 0; a < currentAccount.events.length; a++){
-            test += currentAccount.events[a].year + "/" + currentAccount.events[a].day + "/" + currentAccount.events[a].month + "/" + currentAccount.events[a].info.replace(" ", "-");
-            if((a+1)!=currentAccount.events.length){
-                test += " ";
+        if(currentAccount.events != null){
+            for(int a = 0; a < currentAccount.events.length; a++){
+                test += currentAccount.events[a].year + "/" + currentAccount.events[a].day + "/" + currentAccount.events[a].month + "/" + currentAccount.events[a].info.replace(" ", "-");
+                if((a+1)!=currentAccount.events.length){
+                    test += " ";
+                }
             }
+            byte[] out = test.getBytes(StandardCharsets.UTF_8);
+            int length = out.length;
+            URL url = new URL("http://localhost:8080/account/"+currentAccount.user+"/events");
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setFixedLengthStreamingMode(length);
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setDoOutput(true);
+            conn.connect();
+            try(OutputStream os = conn.getOutputStream()) {
+                os.write(out);
+            }
+            conn.disconnect();
         }
-        byte[] out = test.getBytes(StandardCharsets.UTF_8);
-        int length = out.length;
-        URL url = new URL("http://localhost:8080/account/"+currentAccount.user+"/events");
-        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-        conn.setRequestMethod("POST");
-        conn.setFixedLengthStreamingMode(length);
-        conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-        conn.setDoOutput(true);
-        conn.connect();
-        try(OutputStream os = conn.getOutputStream()) {
-            os.write(out);
-        }
-        conn.disconnect();
         Stage stage = (Stage) logOutBtn.getScene().getWindow();
         stage.close();
     }
