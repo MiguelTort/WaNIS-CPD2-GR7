@@ -1,0 +1,21 @@
+.gridWindow {
+    -fx-background-color: dodgerblue;
+}
+
+.header {
+    -fx-background-color: blue;
+}
+
+.labelHeader {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 20;
+}
+
+.floorHeader {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 20;
+}
