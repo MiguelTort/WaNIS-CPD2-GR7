@@ -13,7 +13,7 @@
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10" vgap="10">
     <GridPane fx:id="gridPaneCalendar" GridPane.columnIndex="0" GridPane.rowIndex="1" GridPane.rowSpan="3"
               prefWidth="850" prefHeight="450" styleClass="gridWindow">
-        <Label fx:id="Test" text="Test" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="0"
+        <Label fx:id="test" text="Test" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="0"
                prefWidth="850" alignment="center" styleClass="floorHeader"/>
         <Button fx:id="leftMonthBtn" text="Left" onAction="#backMonth" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
         <Button fx:id="rightMonthBtn" text="Right" onAction="#forwMonth" GridPane.columnIndex="6"
@@ -43,35 +43,56 @@
                 alignment="center"/>
         <Button fx:id="deleteEventBtn" text="Delete Event" onAction="#deleteEventMode" GridPane.columnIndex="0" GridPane.rowIndex="2" prefWidth="300"
                 alignment="center"/>
-        <Button fx:id="logOutBtn" text="Log Out" onAction="#logOut" GridPane.columnIndex="0" GridPane.rowIndex="3" prefWidth="300"
+        <Button fx:id="viewNewsBtn" text="View News" onAction="#viewNews" GridPane.columnIndex="0" GridPane.rowIndex="3" prefWidth="300"
+                alignment="center"/>
+        <Button fx:id="logOutBtn" text="Log Out" onAction="#logOut" GridPane.columnIndex="0" GridPane.rowIndex="4" prefWidth="300"
                 alignment="center"/>
     </GridPane>
     <GridPane fx:id="gridPaneToDoList" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3"
               prefWidth="300" prefHeight="200" styleClass="gridWindow">
         <Label fx:id="ToDo" text="To-Do List" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="300"
                alignment="center" styleClass="floorHeader"/>
+        <Group fx:id="ToDoDisplay" translateX="10" GridPane.columnIndex="0" GridPane.rowIndex="1"
+                styleClass="eventtext"/>
+        <TextArea fx:id="NewsDisplay" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="200" prefHeight="500"
+                  visible="false" editable="false" styleClass="newstext" GridPane.rowSpan="2" wrapText="true"/>
     </GridPane>
-    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4"
-              prefWidth="850" prefHeight="200">
-        <TextArea fx:id="infoArea" editable="false" text="Welcome!" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="0" GridPane.rowSpan="5"
-                  prefWidth="850" prefHeight="200"/>
-        <TextField fx:id="dayTField" GridPane.columnIndex="1" GridPane.rowIndex="0" visible="false"
+    <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4" prefWidth="850" prefHeight="200">
+        <TextArea fx:id="infoArea" editable="false" text="Welcome!" GridPane.columnIndex="0" GridPane.columnSpan="8" GridPane.rowIndex="0" GridPane.rowSpan="5"
+                  prefWidth="850" prefHeight="200" styleClass="eventtext"/>
+        <TextField fx:id="dayTField" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="0" visible="false" editable="false"
                   prefWidth="700" prefHeight="25"/>
-        <TextField fx:id="monthTField" GridPane.columnIndex="1" GridPane.rowIndex="1" visible="false"
+        <TextField fx:id="monthTField" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="1" visible="false" editable="false"
                   prefWidth="700" prefHeight="25"/>
-        <TextField fx:id="yearTField" GridPane.columnIndex="1" GridPane.rowIndex="2" visible="false"
+        <TextField fx:id="yearTField" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="2" visible="false"
                   prefWidth="700" prefHeight="25"/>
-        <TextField fx:id="infoTField" GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false"
-                   prefWidth="700" prefHeight="100"/>
+        <TextField fx:id="infoTField" GridPane.columnIndex="1" GridPane.columnSpan="7" GridPane.rowIndex="4" visible="false"
+                   prefWidth="700" prefHeight="75"/>
+        <TextField fx:id="startHourTField" GridPane.columnIndex="1" GridPane.rowIndex="3" visible="false"
+                   prefHeight="25"/>
+        <Label fx:id="timeSepLabel1" text=":" GridPane.columnIndex="2" GridPane.rowIndex="3" visible="false"
+               prefHeight="25"/>
+        <TextField fx:id="startMinuteTField" GridPane.columnIndex="3" GridPane.rowIndex="3" visible="false"
+                   prefHeight="25"/>
+        <Label fx:id="timeSepLabel2" text=" - " GridPane.columnIndex="4" GridPane.rowIndex="3" visible="false"
+               />
+        <TextField fx:id="endHourTField" GridPane.columnIndex="5" GridPane.rowIndex="3" visible="false"
+                   prefHeight="25"/>
+        <Label fx:id="timeSepLabel3" text=":" GridPane.columnIndex="6" GridPane.rowIndex="3" visible="false"
+               />
+        <TextField fx:id="endMinuteHourTField" GridPane.columnIndex="7" GridPane.rowIndex="3" visible="false"
+                   prefHeight="25"/>
         <Label fx:id="dayLabel" text="Day" GridPane.columnIndex="0" GridPane.rowIndex="0" visible="false"
                    prefWidth="100"/>
         <Label fx:id="monthLabel" text="Month" GridPane.columnIndex="0" GridPane.rowIndex="1" visible="false"
                    prefWidth="100"/>
         <Label fx:id="yearLabel" text="Year" GridPane.columnIndex="0" GridPane.rowIndex="2" visible="false"
                    prefWidth="100"/>
-        <Label fx:id="infoLabel" text="Info" GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false"
+        <Label fx:id="timeLabel" text="Time" GridPane.columnIndex="0" GridPane.rowIndex="3" visible="false"
+               prefWidth="100"/>
+        <Label fx:id="infoLabel" text="Info" GridPane.columnIndex="0" GridPane.rowIndex="4" visible="false"
                    prefWidth="100"/>
-        <Button fx:id="saveEventBtn" text="Save Event" onAction="#saveEvent" GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2" visible="false"
+        <Button fx:id="saveEventBtn" text="Save Event" onAction="#saveEvent" GridPane.columnIndex="0" GridPane.rowIndex="5" GridPane.columnSpan="8" visible="false"
                prefWidth="850"/>
     </GridPane>
 

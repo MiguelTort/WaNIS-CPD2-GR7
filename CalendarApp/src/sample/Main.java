@@ -19,9 +19,6 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Controllers/FXMLs/LogInScreen.fxml"));
         Parent root = loader.load();
-
-        // Controller cont = loader.getController();
-        // cont.init();
         primaryStage.setTitle("Log In");
         primaryStage.setScene(new Scene(root, 600, 400));
         primaryStage.show();

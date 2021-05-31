@@ -6,9 +6,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<GridPane xmlns="http://javafx.com/javafx"
-            prefHeight="400.0" prefWidth="600.0">
+<?import java.net.URL?>
+<GridPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" alignment="CENTER"
+           fx:controller="sample.Controllers.LogInFailController" prefHeight="400.0" prefWidth="600.0">
 
-    <Label text="Username or Password is incorrect" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+    <Label text="Username or Password is incorrect" alignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="errortext"/>
+    <stylesheets>
+        <URL value="@stylesheet/style.css"/>
+    </stylesheets>
 
 </GridPane>

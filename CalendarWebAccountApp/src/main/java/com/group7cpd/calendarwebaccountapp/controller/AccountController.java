@@ -1,12 +1,13 @@
 package com.group7cpd.calendarwebaccountapp.controller;
 
 import com.group7cpd.calendarwebaccountapp.model.Account;
-import com.group7cpd.calendarwebaccountapp.repository.AccountRepository;
 import com.group7cpd.calendarwebaccountapp.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+
 
 @RestController
 public class AccountController {
@@ -48,3 +49,5 @@ public class AccountController {
         accountService.addEvent(name, events);
     }
 }
+
+
