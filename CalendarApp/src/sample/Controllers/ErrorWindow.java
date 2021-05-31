@@ -8,8 +8,4 @@ import javafx.stage.Stage;
 public class ErrorWindow {
     public Button errorAcceptBtn;
 
-    public void close(ActionEvent actionEvent) {
-        Stage stage = (Stage) errorAcceptBtn.getScene().getWindow();
-        stage.close();
-    }
 }

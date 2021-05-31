@@ -6,14 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import objects.Account;
 import objects.Event;
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -26,7 +24,7 @@ public class LogInScreenController {
 
     public Button LogInBtnAccept;
     public TextField UsernameTField;
-    public TextField PasswordTField;
+    public PasswordField PasswordTField;
     public Label LogInLabel;
     public Button CreateAccountBtnAccept;
     public Button DeleteAccountBtnAccept;
@@ -46,6 +44,7 @@ public class LogInScreenController {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.connect();
+
 
                 //Getting the response code
                 int responsecode = conn.getResponseCode();
@@ -91,15 +90,15 @@ public class LogInScreenController {
                 conn.connect();
                 try(OutputStream os = conn.getOutputStream()) {
                     os.write(out);
+                    receivedAccount = new Account();
+                    receivedAccount.user = UsernameTField.getText();
+                    receivedAccount.events = null;
+                }catch(IOException connectError){
+                    LogInLabel.setText("Could not connect to server.");
                 }
-                conn.disconnect();
-                receivedAccount = new Account();
-                receivedAccount.user = UsernameTField.getText();
-                receivedAccount.events = null;
-
                 changeWindow();
-            }else if(deleteAccountMode){
-                System.out.println("test");
+                conn.disconnect();
+            }else{
                 URL url = new URL("http://localhost:8080/account/deletion/"+ UsernameTField.getText() + "/" + PasswordTField.getText());
                 String ping = "ping";
                 byte[] out = ping.getBytes(StandardCharsets.UTF_8);
@@ -112,8 +111,16 @@ public class LogInScreenController {
                 conn.connect();
                 try(OutputStream os = conn.getOutputStream()) {
                     os.write(out);
+                    LogInLabel.setText("Account has been deleted. Please enter other Log In information.");
+                }catch(IOException connectError){
+                    LogInLabel.setText("Could not connect to server.");
                 }
                 conn.disconnect();
+
+                deleteAccountMode = false;
+                LogInBtnAccept.setText("Log In");
+                DeleteAccountBtnAccept.setText("Delete Account");
+                CreateAccountBtnAccept.setVisible(true);
             }
         }
     }
@@ -128,26 +135,33 @@ public class LogInScreenController {
     private Event[] takeEvents(){
         String info[] = inline.split(",");
         String info2[] = info[3].split(":");
-        System.out.println(info2[1]);
-        if(info2[1].replace("\"", "").replace("}", "").compareTo("")!=0){
+        System.out.println("-"+info2[1].replace("\"", "").replace("}", "")+"-");
+        if(info2[1].replace("\"", "").replace("}", "").compareTo("")!=0 || info2[1].replace("\"", "").replace("}", "").compareTo(" ")!=0 || info2[1].compareTo("")!=0 || info2[1].compareTo(" ")!=0){
+
             String info3[] = info2[1].split(" ");
             info3[0] = info3[0].replace("\"", "");
             info3[info3.length-1] = info3[info3.length-1].replace("\"", "");
             info3[info3.length-1] = info3[info3.length-1].replace("}", "");
             Event events[] = new Event[info3.length];
-
             for(int z = 0; z < info3.length; z++){
                 String info4[] = info3[z].split("/");
+                if(info4[z].compareTo("")==0 || info4[z].compareTo(" ")==0){
+                    return new Event[0];
+                }
                 events[z] = new Event();
                 events[z].year = Integer.parseInt(info4[0]);
                 events[z].day = Integer.parseInt(info4[1]);
                 events[z].month = Integer.parseInt(info4[2]);
                 events[z].info = info4[3].replace("-", " ");
+                String info5[] = info4[4].split(";");
+                events[z].startHour = Integer.parseInt(info5[0]);
+                events[z].startMin = Integer.parseInt(info5[1]);
+                events[z].endHour = Integer.parseInt(info5[2]);
+                events[z].endMin = Integer.parseInt(info5[3]);
             }
             return events;
         }
-        Event[] emptyEvent = new Event[0];
-        return emptyEvent;
+        return new Event[0];
     }
 
     public void createAccount(ActionEvent actionEvent) {
@@ -175,7 +189,7 @@ public class LogInScreenController {
 
         Controller cont = loader.getController();
         cont.init(receivedAccount);
-        stage.setTitle("Log In");
+        stage.setTitle("Calendar App!");
         stage.setScene(new Scene(root, 1200, 750));
     }
 
