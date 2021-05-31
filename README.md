@@ -9,7 +9,11 @@ The Objective of this project is the creation of a more innovative scheduling ap
 Current Contents of this Repository:
 1. The Calendar Web App API, this is the web application or Rest API wherein all the account and event information is stored, requested, and uploaded to. The project is made in IntelliJ IDEA using the Spring format.
 
-*requirements or dependencies used*
+Dependencies Used:
+  - JavaFX
+  - Spring Application Framework
+  - WeatherAPI.com
+  - NewsAPI.org
 
 *environment setup for the project to run (step-by-step procedures or commands)*
 
