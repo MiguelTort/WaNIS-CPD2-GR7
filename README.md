@@ -6,21 +6,22 @@ This is the repository for the Weather and News Integrated Scheduler (WaNIS) Pro
 This Project is a Web Application that functions mainly as a personal scheduler, but its unique features are the enabling of push notifications that relate to weather and news that the software deems relevant to the user's time management and schedule.
 The Objective of this project is the creation of a more innovative scheduling application that should prove to be significantly more functional than generic calendar applications or real-world planners that are commonly used today.
 
-Current Contents of this Repository:
-1. The Calendar Web App API, this is the web application or Rest API wherein all the account and event information is stored, requested, and uploaded to. The project is made in IntelliJ IDEA using the Spring format.
-
 Dependencies Used:
   - JavaFX
   - Spring Application Framework
   - WeatherAPI.com
   - NewsAPI.org
+  - https://www.jetbrains.com/help/idea/javafx.html#run
 
 *environment setup for the project to run (step-by-step procedures or commands)*
 
 Revision Logs:
-1. Project version 0.1 - 03/22/21 - The project is near conceptually done, SRS document is in progress.
-2. Project version 0.2 - 04/05/21 - Calendar Web App API has been made and is now a functioning prototype, SRS is almost complete with few revisions needed.
-3. Project version 0.3 - 04/19/21 - The main application has been prototyped, enough has been made for a functioning demonstration.
+1. Project version 0.1 - 03/22/21 - Version 0.1 is the newly created and starting version for the system.
+2. Project version 0.2 - 04/05/21 - Progress upon the first version has been made. Planning is mostly complete. Login Application has been made.
+3. Project version 0.3 - 04/19/21 - Main calendar application for the project is currently being developed.
+4. Project version 0.5 - 05/21/21 - Main application is complete, the functions work as intended and a suitable UI is presented.
+5. Project version 0.8 - 05/22/21 - Data collection and Login API is finished. It has had some testing, and works correctly with the application.
+6. Project version 1.0 - 05/31/21 - News and Weather APIs have been completed. Final testing has proceeded. Project is complete.
 
 Contributors' Contacts:
 1. Rafael Banaag - rafael_banaag@dlsu.edu.ph
