@@ -20,7 +20,7 @@ public class Main extends Application {
         loader.setLocation(getClass().getResource("Controllers/FXMLs/LogInScreen.fxml"));
         Parent root = loader.load();
         primaryStage.setTitle("Log In");
-        primaryStage.setScene(new Scene(root, 600, 400));
+        primaryStage.setScene(new Scene(root, 400, 400));
         primaryStage.show();
     }
 

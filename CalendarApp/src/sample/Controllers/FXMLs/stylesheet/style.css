@@ -29,6 +29,8 @@
 .newstext{
     -fx-text-fill: black;
     -fx-font-weight: bold;
+    -fx-font-family:"Arial Black";
+    -fx-alignment: center;
     -fx-font-size: 12;
 }
 
@@ -38,4 +40,19 @@
     -fx-font-family: "Courier New";
     -fx-alignment: center;
     -fx-font-size: 12;
+}
+
+.logintext{
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 12;
+}
+
+.loginlabel{
+    -fx-font-family: "Arial Black";
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 12;
+    -fx-background-color: cyan;
 }
