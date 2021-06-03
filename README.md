@@ -13,7 +13,22 @@ Dependencies Used:
   - NewsAPI.org
   - https://www.jetbrains.com/help/idea/javafx.html#run
 
-*environment setup for the project to run (step-by-step procedures or commands)*
+Project Setup to RUN:
+1.	The program is dependent on JavaFX. First download a Java IDE in case you do not have one. https://treehouse.github.io/installation-guides/windows/intellij-idea-win.html
+2.	Download the 2 available files for the project. CalendarWebAccountApp Program and CalendarApp Program.
+3.	Run both programs to continue.
+4.	The program mainly runs on the following features:
+    - Create Account
+    - Login
+    - Create Events
+    - Delete Events
+    - Save Events
+    - Logout
+    - Delete Account
+5.	To run the Database, which is important for this project, first open a web browser and go to: http://localhost:8080/h2-console
+6.	Login. There is no password by default.
+7.	Click on the “Account” table on the right, and click “run”.
+8.	Keep in mind that the default save location for the Database is in “C:\data”.
 
 Revision Logs:
 1. Project version 0.1 - 03/22/21 - Version 0.1 is the newly created and starting version for the system.
