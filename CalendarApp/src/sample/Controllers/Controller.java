@@ -129,7 +129,17 @@ public class Controller {
                         Label lab = new Label(currentAccount.events[z].info);
                         lab.setTranslateY(35 + (count * 105));
                         lab.setTranslateX(5);
-                        Label timelab = new Label(currentAccount.events[z].startHour+":"+currentAccount.events[z].startMin+" - "+currentAccount.events[z].endHour+":"+currentAccount.events[z].endMin);
+                        Label timelab;
+                        if(currentAccount.events[z].startMin<10){
+                            timelab = new Label(currentAccount.events[z].startHour + ":0" + currentAccount.events[z].startMin + " - ");
+                        }else{
+                            timelab = new Label(currentAccount.events[z].startHour + ":" + currentAccount.events[z].startMin + " - ");
+                        }
+                        if(currentAccount.events[z].endMin<10){
+                            timelab.setText(timelab.getText() + currentAccount.events[z].endHour + ":0" + currentAccount.events[z].endMin);
+                        }else{
+                            timelab.setText(timelab.getText() + currentAccount.events[z].endHour + ":" + currentAccount.events[z].endMin);
+                        }
                         timelab.setTranslateY(20 + (count * 105));
                         timelab.setTranslateX(5);
                         timelab.setAlignment(Pos.TOP_LEFT);
@@ -185,7 +195,17 @@ public class Controller {
                                 Label lab = new Label(currentAccount.events[z].info);
                                 lab.setTranslateY(35 + (count * 105));
                                 lab.setTranslateX(5);
-                                Label timelab = new Label(currentAccount.events[z].startHour + ":" + currentAccount.events[z].startMin + " - " + currentAccount.events[z].endHour + ":" + currentAccount.events[z].endMin);
+                                Label timelab;
+                                if(currentAccount.events[z].startMin<10){
+                                    timelab = new Label(currentAccount.events[z].startHour + ":0" + currentAccount.events[z].startMin + " - ");
+                                }else{
+                                    timelab = new Label(currentAccount.events[z].startHour + ":" + currentAccount.events[z].startMin + " - ");
+                                }
+                                if(currentAccount.events[z].endMin<10){
+                                    timelab.setText(timelab.getText() + currentAccount.events[z].endHour + ":0" + currentAccount.events[z].endMin);
+                                }else{
+                                    timelab.setText(timelab.getText() + currentAccount.events[z].endHour + ":" + currentAccount.events[z].endMin);
+                                }
                                 timelab.setTranslateY(20 + (count * 105));
                                 timelab.setTranslateX(5);
                                 timelab.setAlignment(Pos.TOP_LEFT);
@@ -575,7 +595,7 @@ public class Controller {
             newsEvents[x-1].year = Integer.parseInt(test2[0]);
             newsEvents[x-1].month = Integer.parseInt(test2[1]);
             newsEvents[x-1].day = Integer.parseInt(test2[2].split("T")[0]);
-            newsEvents[x-1].info = test1[x].split(",\"description\":")[0] + "\n\n" + test1[x].split(",\"description\":")[1].split(",\"url\":\"")[0];
+            newsEvents[x-1].info = test1[x].split(",\"description\":")[0] + "\n\n" + test1[x].split(",\"description\":")[1].split(",\"url\":\"")[0].replace("null", "");
             newsEvents[x-1].extraInfo = test1[x].split(",\"url\":\"")[1].split("\",")[0];
         }
         conn.disconnect();

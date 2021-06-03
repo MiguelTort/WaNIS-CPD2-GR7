@@ -28,6 +28,7 @@ public class LogInScreenController {
     public Label LogInLabel;
     public Button CreateAccountBtnAccept;
     public Button DeleteAccountBtnAccept;
+    public Label InfoLabel;
     private boolean openWindow;
     private boolean createAccountMode;
     private boolean deleteAccountMode;
@@ -37,46 +38,47 @@ public class LogInScreenController {
     public void checkAccountInfo(ActionEvent actionEvent) throws IOException {
         if(!openWindow){
             if(UsernameTField.getText().compareTo("")==0 || PasswordTField.getText().compareTo("")==0){
-                LogInLabel.setText("Please do not leave any information blank.");
+                InfoLabel.setText("Please do not leave any information blank.");
             }else if(!createAccountMode && !deleteAccountMode){
                 URL url = new URL("http://localhost:8080/account/login/"+ UsernameTField.getText() + "/" + PasswordTField.getText());
 
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
-                conn.connect();
+                try{
+                    conn.connect();
+                    int responsecode = conn.getResponseCode();
 
+                    if(responsecode==200){
+                        Scanner scanner = new Scanner(url.openStream());
+                        //Write all the JSON data into a string using a scanner
+                        while (scanner.hasNext()) {
+                            inline += scanner.nextLine();
+                        }
+                        scanner.close();
+                        if(inline.compareTo("")==0){
+                            openWindow = true;
+                            FXMLLoader loader = new FXMLLoader();
+                            loader.setLocation(getClass().getResource("FXMLs/LogInFail.fxml"));
+                            Scene errorScene = new Scene(loader.load(), 250, 50);
+                            Stage errorStage = new Stage();
+                            errorStage.setTitle("Failed to Log In");
+                            errorStage.setScene(errorScene);
+                            errorStage.show();
+                            errorStage.setOnCloseRequest(event ->{
+                                openWindow = false;
+                            });
+                        }else{
+                            receivedAccount = new Account();
+                            receivedAccount.user = takeUsername();
+                            receivedAccount.events = takeEvents();
 
-                //Getting the response code
-                int responsecode = conn.getResponseCode();
-
-                if(responsecode==200){
-                    Scanner scanner = new Scanner(url.openStream());
-                    //Write all the JSON data into a string using a scanner
-                    while (scanner.hasNext()) {
-                        inline += scanner.nextLine();
+                            changeWindow();
+                        }
                     }
-                    scanner.close();
-                    if(inline.compareTo("")==0){
-                        openWindow = true;
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(getClass().getResource("FXMLs/LogInFail.fxml"));
-                        Scene errorScene = new Scene(loader.load(), 250, 50);
-                        Stage errorStage = new Stage();
-                        errorStage.setTitle("Failed to Log In");
-                        errorStage.setScene(errorScene);
-                        errorStage.show();
-                        errorStage.setOnCloseRequest(event ->{
-                            openWindow = false;
-                        });
-                    }else{
-                        receivedAccount = new Account();
-                        receivedAccount.user = takeUsername();
-                        receivedAccount.events = takeEvents();
-
-                        changeWindow();
-                    }
+                    conn.disconnect();
+                }catch(IOException connectError){
+                    InfoLabel.setText("Could not connect to server.");
                 }
-                conn.disconnect();
             }else if(createAccountMode){
                 String test = "{\"name\": \"" + UsernameTField.getText() + "\",\n\"password\": \"" + PasswordTField.getText() + "\",\n\"events\": \"\"\n}";
                 byte[] out = test.getBytes(StandardCharsets.UTF_8);
@@ -87,17 +89,18 @@ public class LogInScreenController {
                 conn.setFixedLengthStreamingMode(length);
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 conn.setDoOutput(true);
-                conn.connect();
+
                 try(OutputStream os = conn.getOutputStream()) {
+                    conn.connect();
                     os.write(out);
                     receivedAccount = new Account();
                     receivedAccount.user = UsernameTField.getText();
                     receivedAccount.events = null;
+                    changeWindow();
+                    conn.disconnect();
                 }catch(IOException connectError){
-                    LogInLabel.setText("Could not connect to server.");
+                    InfoLabel.setText("Could not connect to server.");
                 }
-                changeWindow();
-                conn.disconnect();
             }else{
                 URL url = new URL("http://localhost:8080/account/deletion/"+ UsernameTField.getText() + "/" + PasswordTField.getText());
                 String ping = "ping";
@@ -108,15 +111,16 @@ public class LogInScreenController {
                 conn.setFixedLengthStreamingMode(length);
                 conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
                 conn.setDoOutput(true);
-                conn.connect();
+
                 try(OutputStream os = conn.getOutputStream()) {
+                    conn.connect();
                     os.write(out);
-                    LogInLabel.setText("Account has been deleted. Please enter other Log In information.");
+                    InfoLabel.setText("Account with chosen username and password has been deleted. Please enter other Log In information.");
+                    LogInLabel.setText("Please enter other Log In information.");
+                    conn.disconnect();
                 }catch(IOException connectError){
                     LogInLabel.setText("Could not connect to server.");
                 }
-                conn.disconnect();
-
                 deleteAccountMode = false;
                 LogInBtnAccept.setText("Log In");
                 DeleteAccountBtnAccept.setText("Delete Account");
@@ -171,12 +175,18 @@ public class LogInScreenController {
             LogInBtnAccept.setText("Create Account");
             CreateAccountBtnAccept.setText("Exit");
             DeleteAccountBtnAccept.setVisible(false);
+            InfoLabel.setText("");
+            PasswordTField.setText("");
+            UsernameTField.setText("");
         }else{
             createAccountMode = false;
             LogInLabel.setText("Please enter your Log In information.");
             LogInBtnAccept.setText("Log In");
             CreateAccountBtnAccept.setText("Create Account");
             DeleteAccountBtnAccept.setVisible(true);
+            InfoLabel.setText("");
+            PasswordTField.setText("");
+            UsernameTField.setText("");
         }
     }
 
@@ -200,12 +210,18 @@ public class LogInScreenController {
             LogInBtnAccept.setText("Delete Account");
             DeleteAccountBtnAccept.setText("Exit");
             CreateAccountBtnAccept.setVisible(false);
+            InfoLabel.setText("");
+            PasswordTField.setText("");
+            UsernameTField.setText("");
         }else{
             deleteAccountMode = false;
             LogInLabel.setText("Please enter your Log In information.");
             LogInBtnAccept.setText("Log In");
             DeleteAccountBtnAccept.setText("Delete Account");
             CreateAccountBtnAccept.setVisible(true);
+            InfoLabel.setText("");
+            PasswordTField.setText("");
+            UsernameTField.setText("");
         }
     }
 }

@@ -50,11 +50,11 @@
     </GridPane>
     <GridPane fx:id="gridPaneToDoList" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="3"
               prefWidth="300" prefHeight="200" styleClass="gridWindow">
-        <Label fx:id="ToDo" text="To-Do List" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="300"
+        <Label fx:id="toDo" text="To-Do List" GridPane.columnIndex="0" GridPane.rowIndex="0" prefWidth="300"
                alignment="center" styleClass="floorHeader"/>
-        <Group fx:id="ToDoDisplay" translateX="10" GridPane.columnIndex="0" GridPane.rowIndex="1"
+        <Group fx:id="toDoDisplay" translateX="10" GridPane.columnIndex="0" GridPane.rowIndex="1"
                 styleClass="eventtext"/>
-        <TextArea fx:id="NewsDisplay" GridPane.columnIndex="0" GridPane.rowIndex="1" prefWidth="200" prefHeight="500"
+        <TextArea fx:id="NewsDisplay" GridPane.columnIndex="0" centerShape="true" GridPane.rowIndex="1" prefWidth="200" prefHeight="500"
                   visible="false" editable="false" styleClass="newstext" GridPane.rowSpan="2" wrapText="true"/>
     </GridPane>
     <GridPane GridPane.columnIndex="0" GridPane.rowIndex="4" prefWidth="850" prefHeight="200">

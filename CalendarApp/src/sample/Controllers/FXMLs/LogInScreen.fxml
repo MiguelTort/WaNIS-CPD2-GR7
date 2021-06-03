@@ -6,17 +6,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
+<?import java.net.URL?>
 <GridPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="sample.Controllers.LogInScreenController"
-            prefHeight="400.0" prefWidth="600.0">
-    <Button fx:id="LogInBtnAccept" onAction="#checkAccountInfo" text="Log In" prefWidth="600" GridPane.columnSpan="2" GridPane.rowIndex="3"/>
-    <Button fx:id="CreateAccountBtnAccept" onAction="#createAccount" text="Create Account" prefWidth="600" GridPane.columnSpan="2" GridPane.rowIndex="4"/>
-    <Button fx:id="DeleteAccountBtnAccept" onAction="#deleteAccount" text="Delete Account" prefWidth="600" GridPane.columnSpan="2" GridPane.rowIndex="5"/>
-    <TextField fx:id="UsernameTField" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
-    <PasswordField fx:id="PasswordTField" prefWidth="400" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-    <Label text="Username" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-    <Label text="Password" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
-    <Label fx:id="LogInLabel" text="Please enter your Log In information." prefWidth="600" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="sample.Controllers.LogInScreenController"
+          prefHeight="400.0" prefWidth="600.0">
+    <Button fx:id="LogInBtnAccept" onAction="#checkAccountInfo" alignment="center" text="Log In" prefWidth="400" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+    <Button fx:id="CreateAccountBtnAccept" onAction="#createAccount" alignment="center" text="Create Account" prefWidth="400" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+    <Button fx:id="DeleteAccountBtnAccept" onAction="#deleteAccount" alignment="center" text="Delete Account" prefWidth="400" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+    <TextField fx:id="UsernameTField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    <PasswordField fx:id="PasswordTField" prefWidth="200" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+    <Label text="Username" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="2" styleClass="logintext"/>
+    <Label text="Password" prefWidth="200" GridPane.columnIndex="0" GridPane.rowIndex="3" styleClass="logintext"/>
+    <Label fx:id="LogInLabel" text="Please enter your Log In information." prefWidth="600" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="0" styleClass="loginlabel"/>
+    <Label fx:id="InfoLabel" text="" prefWidth="600" GridPane.columnSpan="2" GridPane.columnIndex="0" GridPane.rowIndex="1" styleClass="loginlabel"/>
+    <stylesheets>
+        <URL value="@stylesheet/style.css"/>
+    </stylesheets>
 
 </GridPane>
